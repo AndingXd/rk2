@@ -43,6 +43,10 @@ public:
     void Restore(Memento* state) {
         _currentText = state->state();
     }
+    std::string GetText() const {
+        return _currentText;
+    }
+}
 };
 
 class Logger {
