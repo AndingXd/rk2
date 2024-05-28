@@ -10,14 +10,18 @@ TEST(MementoTest, ConstructorSetsState) {
     ASSERT_EQ(memento.state(), expectedState);
 }
 
-TEST(TextEditorTest, AppendText) {
+TEST(LoggerTest, UndoRestoresPreviousState) {
     TextEditor editor;
+    Logger logger(&editor);
 
     editor.AppendText("Hello");
-    ASSERT_EQ(editor._currentText, "Hello");
+    logger.Backup();
 
-    editor.AppendText(", world!");
-    ASSERT_EQ(editor._currentText, "Hello, world!");
+    editor.AppendText(" Dear Amin");
+    std::string expectedText = "Hello Dear Amin";
+
+    logger.Undo();
+    ASSERT_EQ(editor.GetText(), expectedText);
 }
 
 TEST(LoggerTest, UndoRestoresPreviousState) {
