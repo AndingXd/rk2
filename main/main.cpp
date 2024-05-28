@@ -46,7 +46,6 @@ public:
     std::string GetText() const {
         return _currentText;
     }
-}
 };
 
 class Logger {
